@@ -1,4 +1,4 @@
-const PAYMENT_LIMIT = 2;
+const PAYMENT_LIMIT = 1000;
 const ATTEMPT_LIMIT = 6;
 const RETRY_DELAY = [2, 5, 10, 20, 30, 60];
 
