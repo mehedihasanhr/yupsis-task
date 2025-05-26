@@ -2,7 +2,6 @@
 const exChangeRate = 3; // 1 mojo = 3 mutki
 
 function calculateExchange(initialMojo = 10) {
-  let totalConsumedMojo = initialMojo;
   let mutki = initialMojo;
   let mojo = initialMojo;
 
@@ -14,13 +13,12 @@ function calculateExchange(initialMojo = 10) {
     const exchangedMojo = Math.floor(mutki / exChangeRate);
 
     mojo += exchangedMojo;
-    totalConsumedMojo += exchangedMojo;
 
     mutki -= exchangedMojo * exChangeRate;
     mutki += exchangedMojo;
   }
 
-  return { mojo: totalConsumedMojo, mutki };
+  return { mojo, mutki };
 }
 
 /************************************** */

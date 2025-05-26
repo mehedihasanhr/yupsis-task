@@ -72,11 +72,14 @@ function testBasicSubtraction() {
   const updatedStock = updateStock(initialStock, sold);
 
   console.log("Updated Stock:", updatedStock);
+  const expectedStock = {
+    tons: 0,
+    kilograms: 499,
+    grams: 499,
+    milligrams: 500,
+  };
 
-  const initialMg = convertToMilligrams(initialStock);
-  const soldMg = convertToMilligrams(sold);
-  const remainingMg = initialMg - soldMg;
-  const expectedStock = convertToStock(remainingMg);
+  console.log("Expected Stock:", expectedStock);
 
   assertEqual(updatedStock, expectedStock, "Basic subtraction should work");
 }
@@ -93,11 +96,13 @@ function testNoSale() {
   const updatedStock = updateStock(initialStock, sold);
 
   console.log("Updated Stock:", updatedStock);
+  const expectedStock = initialStock;
+  console.log("Expected Stock:", expectedStock);
 
   assertEqual(
     updatedStock,
-    initialStock,
-    "No sale should keep stock unchanged"
+    expectedStock,
+    "No sale should keep stock unchanged",
   );
 }
 
@@ -115,10 +120,11 @@ function testSoldEverything() {
   console.log("Updated Stock:", updatedStock);
 
   const expectedStock = { tons: 0, kilograms: 0, grams: 0, milligrams: 0 };
+  console.log("Expected Stock:", expectedStock);
   assertEqual(
     updatedStock,
     expectedStock,
-    "Sold everything should leave stock at zero"
+    "Sold everything should leave stock at zero",
   );
 }
 
@@ -141,12 +147,12 @@ function testSoldMoreThanStock() {
     assertEqual(
       e.message,
       "Not enough stock available",
-      "Should throw when sold more than available"
+      "Should throw when sold more than available",
     );
   }
   if (!errorCaught) {
     console.error(
-      "❌ Should have thrown an error when sold more than available"
+      "❌ Should have thrown an error when sold more than available",
     );
   } else {
     console.log("✅ Sold more than available throws an error");
@@ -166,11 +172,8 @@ function testSubtract500Grams() {
 
   console.log("Updated Stock:", updatedStock);
 
-  // Calculate expected stock manually
-  const initialMg = convertToMilligrams(initialStock);
-  const soldMg = convertToMilligrams(sold);
-  const remainingMg = initialMg - soldMg;
-  const expectedStock = convertToStock(remainingMg);
+  const expectedStock = { tons: 0, kilograms: 999, grams: 500, milligrams: 0 };
+  console.log("Expected Stock:", expectedStock);
 
   assertEqual(updatedStock, expectedStock, "Subtracting 500 grams should work");
 }
